@@ -4,12 +4,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public class Barista extends GameEntity {
-    private double speed = 100; // increased speed for a more aggressive chase
+    private double speed = 75; // increased speed for a more aggressive chase
     private Image baristaImage;
 
     public Barista(double x, double y, double radius) {
         super(x, y, radius);
-        // Load barista image (ensure /images/barista.png exists in your resources)
+        // Load barista image (ensure /images/barista.png exists in resources)
         baristaImage = new Image(getClass().getResourceAsStream("/images/barista.png"));
     }
 

@@ -8,7 +8,7 @@ public class SmallCup extends Cup {
 
     public SmallCup(double x, double y, double radius) {
         super(x, y, radius);
-        // Load small cup image (ensure /images/small_cup.png exists in your resources)
+        // Load small cup image (ensure /images/small_cup.png exists in resources)
         cupImage = new Image(getClass().getResourceAsStream("/images/small_cup.png"));
     }
     @Override

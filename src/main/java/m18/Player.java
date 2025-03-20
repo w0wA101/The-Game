@@ -10,7 +10,7 @@ public class Player extends GameEntity {
 
     public Player(double x, double y, double radius) {
         super(x, y, radius);
-        // Load player image (ensure /images/player.png exists in your resources)
+        // Load player image (ensure /images/player.png exists in resources)
         playerImage = new Image(getClass().getResourceAsStream("/images/player.png"));
     }
 

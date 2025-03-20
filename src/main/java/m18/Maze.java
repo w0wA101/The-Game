@@ -17,7 +17,7 @@ public class Maze {
         grid = new int[rows][cols];
     }
 
-    // Generates a maze with boundaries, a central horizontal wall (with a gap), and random obstacles
+    // Generates a maze with boundaries, random obstacles, and a guaranteed vertical corridor in the middle.
     public void generateSampleMaze() {
         // Create boundaries
         for (int i = 0; i < rows; i++) {
@@ -28,6 +28,7 @@ public class Maze {
             grid[0][j] = WALL;
             grid[rows - 1][j] = WALL;
         }
+
         // Fill inner cells with floor
         for (int i = 1; i < rows - 1; i++) {
             for (int j = 1; j < cols - 1; j++) {
@@ -35,24 +36,26 @@ public class Maze {
             }
         }
 
-        // Add a horizontal wall in the middle with a gap
-        int midRow = rows / 2;
-        for (int j = 1; j < cols - 1; j++) {
-            grid[midRow][j] = WALL;
-        }
-        // Create a gap in the horizontal wall
-        grid[midRow][cols / 2] = FLOOR;
-
-        // Add extra random obstacles to enhance maze randomization (except critical cells)
+        // Add extra random obstacles (15% chance for each inner cell to become a wall)
         for (int i = 1; i < rows - 1; i++) {
             for (int j = 1; j < cols - 1; j++) {
-                // Avoid overwriting player's spawn (1,1), barista spawn (rows-2, cols-2), and the gap in the wall
-                if (!((i == 1 && j == 1) || (i == rows - 2 && j == cols - 2) || (i == midRow && j == cols/2))) {
-                    if (Math.random() < 0.15) { // 15% chance to place a wall
+                // Do not override critical spawn cells if needed (player: [1,1], barista: [rows-2, cols-2])
+                if (!((i == 1 && j == 1) || (i == rows - 2 && j == cols - 2))) {
+                    if (Math.random() < 0.15) {
                         grid[i][j] = WALL;
                     }
                 }
             }
+        }
+
+        // Ensure a guaranteed vertical corridor in the middle:
+        // Define the corridor as two adjacent columns (at cols/2-1 and cols/2) that will always be FLOOR,
+        // for rows from rows/3 to 2*rows/3.
+        int corridorCol1 = cols / 2 - 1;
+        int corridorCol2 = cols / 2;
+        for (int i = rows / 3; i < 2 * rows / 3; i++) {
+            grid[i][corridorCol1] = FLOOR;
+            grid[i][corridorCol2] = FLOOR;
         }
     }
 

@@ -8,7 +8,7 @@ public class MediumCup extends Cup {
 
     public MediumCup(double x, double y, double radius) {
         super(x, y, radius);
-        // Load medium cup image (ensure /images/medium_cup.png exists in your resources)
+        // Load medium cup image (ensure /images/medium_cup.png exists in resources)
         cupImage = new Image(getClass().getResourceAsStream("/images/medium_cup.png"));
     }
     @Override
